@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dimft Games - Indie game studio crafting immersive worlds and memorable gameplay experiences.">
+  <meta name="theme-color" content="#0b0c10">
+  <title>Dimft Games | Indie Game Studio</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #0b0c10;
+      --bg-card: #15191d;
+      --bg-nav: rgba(11, 12, 16, 0.95);
+      --accent: #45a29e;
+      --accent-hover: #66fcf1;
+      --text-primary: #c5c6c7;
+      --text-light: #ffffff;
+      --font-heading: 'Orbitron', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--bg-nav);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-hover);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: radial-gradient(circle at top right, #1a2026 0%, transparent 40%);
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0.85;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background: var(--accent);
+      color: var(--bg-dark);
+      font-weight: 600;
+      border-radius: 6px;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .btn:hover {
+      background: transparent;
+      border-color: var(--accent);
+      color: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(69, 162, 158, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--bg-dark);
+    }
+
+    /* Sections General */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border-color: rgba(69, 162, 158, 0.3);
+    }
+
+    .game-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #1a2026;
+    }
+
+    .game-info {
+      padding: 1.5rem;
+    }
+
+    .game-info h3 {
+      color: var(--text-light);
+      font-family: var(--font-heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .game-info p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      background: rgba(69, 162, 158, 0.15);
+      color: var(--accent);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* About & Contact */
+    .about-content, .contact-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .contact-links a:hover {
+      color: var(--accent-hover);
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #08090c;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-nav);
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 0;
+        gap: 1.5rem;
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 1rem;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">Dimft<span>Games</span></a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Crafting Worlds,<br>One Pixel at a Time</h1>
+      <p>Indie game studio focused on immersive storytelling, tight mechanics, and unforgettable experiences.</p>
+      <div class="hero-buttons">
+        <a href="#games" class="btn">Our Games</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section id="games">
+    <div class="container">
+      <h2 class="section-title">Featured Games</h2>
+      <div class="games-grid">
+        <!-- Game 1 -->
+        <article class="game-card">
+          <img src="https://placehold.co/600x400/15191d/45a29e?text=Neon+Drift" alt="Neon Drift Screenshot" class="game-img">
+          <div class="game-info">
+            <h3>Neon Drift</h3>
+            <div class="tags">
+              <span class="tag">Racing</span>
+              <span class="tag">Arcade</span>
+            </div>
+            <p>High-speed synthwave racing through cyberpunk cityscapes. Master the drift, own the neon.</p>
+            <a href="#" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Play on Itch.io</a>
+          </div>
+        </article>
+        <!-- Game 2 -->
+        <article class="game-card">
+          <img src="https://placehold.co/600x400/15191d/45a29e?text=Echo+Realms" alt="Echo Realms Screenshot" class="game-img">
+          <div class="game-info">
+            <h3>Echo Realms</h3>
+            <div class="tags">
+              <span class="tag">Puzzle</span>
+              <span class="tag">Atmospheric</span>
+            </div>
+            <p>Navigate shifting dimensions using sound and light. A meditative puzzle adventure.</p>
+            <a href="#" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">View Details</a>
+          </div>
+        </article>
+        <!-- Game 3 -->
+        <article class="game-card">
+          <img src="https://placehold.co/600x400/15191d/45a29e?text=Void+Protocol" alt="Void Protocol Screenshot" class="game-img">
+          <div class="game-info">
+            <h3>Void Protocol</h3>
+            <div class="tags">
+              <span class="tag">Strategy</span>
+              <span class="tag">Sci-Fi</span>
+            </div>
+            <p>Command a rogue AI fleet across fractured star systems. Turn-based tactics, deep lore.</p>
+            <a href="#" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Wishlist on Steam</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" style="background: #0d1013;">
+    <div class="container">
+      <h2 class="section-title">About Dimft Games</h2>
+      <div class="about-content">
+        <p>Founded by passionate developers and artists, Dimft Games is an indie studio dedicated to pushing creative boundaries. We believe games should challenge, inspire, and bring people together. Every project starts with a simple question: <em>"Will this make players feel something?"</em></p>
+        <p style="margin-top: 1rem; opacity: 0.7;">We're currently working on our next release and actively looking for playtesters and collaborators. Stay tuned.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Connect With Us</h2>
+      <div class="contact-content">
+        <p>Have feedback, partnership inquiries, or just want to say hi? Reach out through our channels.</p>
+        <div class="contact-links">
+          <a href="mailto:contact@dimftgames.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="Itch.io"><i class="fas fa-gamepad"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Dimft Games. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = menuToggle.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-xmark');
+      });
+    });
+
+    // Dynamic Copyright Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
